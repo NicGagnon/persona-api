@@ -1,28 +1,113 @@
-# Persona API
-The Persona API is a fake RESTful API that delivers made up data on a few endpoints. The data sits within a zip file and needs to be decompressed only on deployment not when it sits in this repository. So you have to find a way to do that in an elegant manner.
 
-## Must Haves
+# Usage
 
-- Develop the server and endpoints mentioned below with a framework of your preference
-- Think carefully about data storage and scalability. Determine any limitations of your server
-- Write a few unit tests with good code coverage
+All responses will have the form 
 
-The REST API uses the data provided and has the following endpoints:
+```json
+{
+    "data": "Mixed type holding the content of the repsonse",
+    "message": "Explanation of the content"
+}
+```
 
-- GET /search/{username} Searches the data for the specific username
-- GET /people Returns all people with pagination
-- DELETE /people/{username} Delete a person
+### Functions
 
-We would like to see good practices regarding the REST API, project structure, code documentation and code organisation. Your server will need to be able to ingest new data and we are expecting to see good use of design patterns where needed and good security practices. 
+The following definitions only detail the expected value from the 'data field'
 
+### Find a User
 
-## Nice To Haves
+*** Definition ***
 
-- Nice to have would be to containerise your server so that it can deployed easily.
-- A front-end that will allow users to search for a person and return back their information. 
+'GET /search/{username}'
 
+*** Responses ***
 
-## Go The Extra Mile
+- '404 Not Found' if the username doesn't exist
+- '200 OK' on success
 
-Come up with some ideas to visualise the fake profile data on a front-end using a framework of your choice.
+```json
+{
+    "job": "Solicitor",
+    "company": "Smith, Haynes and Hooper",
+    "ssn": "ZZ376803T",
+    "residence": "1 Bruce alley\nNew Justin\nL07 2TE",
+    "current_location": [-66.491849, -69.512524],
+    "blood_group": "AB+",
+    "website": [
+        "https://www.holmes-saunders.com/",
+         "http://foster-ford.com/",
+         "https://www.farrell-evans.com/",
+         "http://white-kelly.net/"
+         ],
+    "username": "mauriceharris",
+    "name": "Dr. Mohamed Newton",
+    "sex": "F",
+    "address": "09 Knight parkways\nWest Yvonneshire\nHD23 5NJ",
+    "mail": "jshort@hotmail.com",
+    "birthdate": "1989-07-07"
+}
+```
+
+### List all people with pagination
+
+*** Definition ***
+
+'GET /people'
+
+*** Responses ***
+
+```json
+[
+    {
+        "job": "Radiographer, therapeutic",
+        "company": "Jones Ltd",
+        "ssn": "ZZ017201T",
+        "residence": "Flat 52C\nShaun mills\nMorrisfurt\nBL50 0YG",
+        "current_location": [-12.119129, -133.859534],
+        "blood_group": "0+",
+        "website": 
+            [
+                "http://douglas.com/",
+                "https://www.lewis-thomas.com/"
+            ],
+        "username": "twong",
+        "name": "Graeme Davis",
+        "sex": "F",
+        "address": "71 Katy mountain\nLake Dennisbury\nB11 5TS",
+        "mail": "andrewsian@gmail.com",
+        "birthdate": "1994-04-04"
+    }, 
+    {
+        "job": "Advertising art director",
+        "company": "Flynn LLC",
+        "ssn": "ZZ230873T",
+        "residence": "Flat 9\nLewis points\nHillchester\nL3F 2JT",
+        "current_location": [-74.774152, -153.777782],
+        "blood_group": "B+",
+        "website": 
+            [
+                "https://harding.org/",
+                "http://www.doyle.net/"
+            ],
+        "username": "ocole",
+        "name": "Ashley Potts",
+        "sex": "F",
+        "address": "79 Gerald course\nWest Jeanport\nTW4 5LT",
+        "mail": "joannaclarke@gmail.com",
+        "birthdate": "2000-11-09"
+    },
+]
+```
+
+### Delete a person
+
+*** Definition ***
+
+'DELETE /people/{username}'
+
+*** Responses
+
+'404 Not Found' User does not exist
+'204 No Content' on success
+
 
