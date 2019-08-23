@@ -1,2 +1,4 @@
+config
 Flask==0.12.2
 markdown==2.6.11
+flask_sqlalchemy==2.4
