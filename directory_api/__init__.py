@@ -8,10 +8,10 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
-basedir = os.path.dirname(app.root_path)
+db.app = app
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-# from app import routes, models
 
 # App.route directs the output of the function directly below to the URL passed. "/" is the root address.
 @app.route("/")
@@ -24,3 +24,11 @@ def index():
 
     # Convert to HTML
     return markdown.markdown(content)
+
+
+class FindUser(Resource):
+  def get(self):
+    return{'message': 'Success', 'data': 'return data'}
+
+
+
