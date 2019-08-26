@@ -1,24 +1,24 @@
-from directory_api import database
+from scripts.database import db
 
 
-class Website(database.Model):
+class Website(db.Model):
   __tablename__ = 'website'
 
-  id = database.Column(database.Integer, primary_key=True)
-  url = database.Column(database.String(128))
-  user_id = database.Column(database.String(64), database.ForeignKey('user.id'))
+  id = db.Column(db.Integer, primary_key=True)
+  url = db.Column(db.String(128))
+  user_id = db.Column(db.String(64), db.ForeignKey('people.id'))
 
   def __init__(self, url, user_id):
     self.url = url
     self.user_id = user_id
 
   def save_to_db(self):
-      database.session.add(self)
-      database.session.commit()
+      db.session.add(self)
+      db.session.commit()
 
   def delete_from_db(self):
-    database.session.delete(self)
-    database.session.commit()
+    db.session.delete(self)
+    db.session.commit()
 
   def __repr__(self):
     return '<Website {}>'.format(self.url)

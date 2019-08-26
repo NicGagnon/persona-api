@@ -1,13 +1,13 @@
-from directory_api import database
+from scripts.database import db
 
 
-class Location(database.Model):
+class Location(db.Model):
   __tablename__ = 'location'
 
-  id = database.Column(database.Integer, primary_key=True)
-  lat = database.Column(database.Integer)
-  lon = database.Column(database.Integer)
-  user_id = database.Column(database.String(64), database.ForeignKey('user.id'))
+  id = db.Column(db.Integer, primary_key=True)
+  lat = db.Column(db.Integer)
+  lon = db.Column(db.Integer)
+  user_id = db.Column(db.String(64), db.ForeignKey('people.id'))
 
   def __init__(self, lat, lon, user_id):
     self.lat = lat

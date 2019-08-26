@@ -1,8 +1,5 @@
 # Written by Nicolas Gagnon 2019
-from directory_api import api, app
-
-
-# app.run(host='0.0.0.0', port=80, debug=True)
+from scripts import api, app
 
 
 @app.before_first_request
@@ -20,6 +17,6 @@ api.add_resource(StoreList, '/stores')
 """
 
 if __name__ == '__main__':
-    from directory_api.database import db  # Avoid circular import
+    from scripts.database import db  # Avoid circular import
     db.init_app(app)
-    app.run(debug=True)  # important to mention debug=True
+    app.run(host='0.0.0.0', port=80, debug=True)  # important to mention debug=True
