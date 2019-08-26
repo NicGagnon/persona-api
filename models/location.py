@@ -1,7 +1,7 @@
 from scripts.database import db
 
 
-class Location(db.Model):
+class LocationModel(db.Model):
   __tablename__ = 'location'
 
   id = db.Column(db.Integer, primary_key=True)

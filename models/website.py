@@ -1,7 +1,7 @@
 from scripts.database import db
 
 
-class Website(db.Model):
+class WebsiteModel(db.Model):
   __tablename__ = 'website'
 
   id = db.Column(db.Integer, primary_key=True)
