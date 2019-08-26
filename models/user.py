@@ -1,22 +1,22 @@
-from directory_api import db
+from directory_api import database
 
-class User(db.Model):
+class User(database.Model):
   __tablename__ = 'user'
 
-  id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-  job = db.Column(db.String(64))
-  company = db.Column(db.String(64))
-  ssn = db.Column(db.String(64), unique=True)
-  residence = db.Column(db.String(128))
-  current_location = db.relationship('Location', cascade="all,delete", backref=db.backref('user_location', lazy='joined'), lazy='dynamic')
-  blood_group = db.Column(db.String(128))
-  website = db.relationship('Website', cascade="all,delete", backref=db.backref('owner', lazy='joined'), lazy='dynamic')
-  username = db.Column(db.String(64), unique=True)
-  name = db.Column(db.String(64))
-  sex = db.Column(db.String(8))
-  address = db.Column(db.String(128))
-  mail = db.Column(db.String(64))
-  birthdate = db.Column(db.String(64))
+  id = database.Column(database.Integer, primary_key=True, autoincrement=True)
+  job = database.Column(database.String(64))
+  company = database.Column(database.String(64))
+  ssn = database.Column(database.String(64), unique=True)
+  residence = database.Column(database.String(128))
+  current_location = database.relationship('Location', cascade="all,delete", backref=database.backref('user_location', lazy='joined'), lazy='dynamic')
+  blood_group = database.Column(database.String(128))
+  website = database.relationship('Website', cascade="all,delete", backref=database.backref('owner', lazy='joined'), lazy='dynamic')
+  username = database.Column(database.String(64), unique=True)
+  name = database.Column(database.String(64))
+  sex = database.Column(database.String(8))
+  address = database.Column(database.String(128))
+  mail = database.Column(database.String(64))
+  birthdate = database.Column(database.String(64))
 
   def __init__(self, job, company, ssn, residence, blood_group, username, name, sex, address, mail, birthdate):
     self.job = job
@@ -32,8 +32,8 @@ class User(db.Model):
     self.birthdate = birthdate
 
   def save_to_db(self):
-    db.session.add(self)
-    db.session.commit()
+    database.session.add(self)
+    database.session.commit()
 
   @classmethod
   def find_by_username(cls, username):

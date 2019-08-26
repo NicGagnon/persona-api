@@ -1,14 +1,14 @@
 from flask import Flask
+from flask_restful import Api
+from config import Config
+
 import markdown
 import os
-from config import Config
-from flask_sqlalchemy import SQLAlchemy
 
 # Create an instance of flask
 app = Flask(__name__)
 app.config.from_object(Config)
-db = SQLAlchemy(app)
-db.app = app
+api = Api(app)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -25,10 +25,6 @@ def index():
     # Convert to HTML
     return markdown.markdown(content)
 
-
-class FindUser(Resource):
-  def get(self):
-    return{'message': 'Success', 'data': 'return data'}
 
 
 
