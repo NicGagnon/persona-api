@@ -1,12 +1,18 @@
 import json
 import os
 import pandas as pd
+import zipfile
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import String, PickleType, create_engine
 from config import basedir
 
 db = SQLAlchemy()
+
+
+def unzip_data():
+  with zipfile.ZipFile(basedir + '/fake_profiles.zip', 'r') as zip_ref:
+    zip_ref.extractall(basedir)
 
 
 def load_database():
@@ -22,4 +28,5 @@ def load_database():
 
 
 if __name__ == '__main__':
+  unzip_data()
   load_database()
