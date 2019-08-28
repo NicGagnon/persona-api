@@ -4,7 +4,6 @@ import json
 
 
 class People(Resource):
-
   # Delete specific person with username
   def delete(self, username):
     user = PeopleModel.find_by_username(username)
@@ -15,8 +14,7 @@ class People(Resource):
 
 
 class PeopleData(Resource):
-
+  # Return pagination of names and usernames
   def get(self):
     return {'people': [{"name and username": json.dumps(person)} for person in
                        PeopleModel.query.with_entities(PeopleModel.name, PeopleModel.username)]}, 200
-

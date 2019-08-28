@@ -4,14 +4,13 @@ from scripts import app
 
 app.run(host='0.0.0.0', port=80, debug=True)  # important to mention debug=True
 
-
-
-
-"""
-api.add_resource(User, '/search/<string:username>')
-api.add_resource(UserData, '/search')
-
-"""
+# todo list
+# - todo pagination of the name/username endpoint
+# - todo write unittest
+# - todo code documentation
+# - todo security measures (jwt library and controlling which methods are allowed)
+# - todo refactoring necessary code from __init__
+# - todo clean up files and Git
 
 
 

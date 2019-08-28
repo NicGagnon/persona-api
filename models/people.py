@@ -1,6 +1,7 @@
 from scripts.database import db
 
 
+# SQLalchemy Model for each person in the database
 class PeopleModel(db.Model):
   __tablename__ = 'people'
 
@@ -19,7 +20,8 @@ class PeopleModel(db.Model):
   mail = db.Column(db.String(64))
   birthdate = db.Column(db.String(64))
 
-  def __init__(self, job, company, ssn, residence, location, blood_group, website, username, name, sex, address, mail, birthdate):
+  def __init__(self, job, company, ssn, residence, location, blood_group, website, username, name, sex, address, mail,
+               birthdate):
     self.job = job
     self.company = company
     self.ssn = ssn
@@ -42,6 +44,7 @@ class PeopleModel(db.Model):
     db.session.delete(self)
     db.session.commit()
 
+  # Jsonify an instance of the PeopleModel
   def json(self):
     return {
       'job': self.job,
@@ -62,10 +65,6 @@ class PeopleModel(db.Model):
   @classmethod
   def find_by_username(cls, username):
     return cls.query.filter_by(username=username).first()
-
-  @classmethod
-  def find_by_id(cls, _id):
-    return cls.query.filter_by(id=_id).first()
 
   def __repr__(self):
     return '<User {}>'.format(self.username)

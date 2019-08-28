@@ -13,6 +13,6 @@ class Search(Resource):
 
 
 class SearchData(Resource):
-
+  # Function returns full data for all user in pagination
   def get(self):
     return {'people': [person.json() for person in PeopleModel.query.all()]}, 200

@@ -3,14 +3,20 @@ from flask_restful import Api
 from config import Config, basedir
 from resources.people import PeopleData, People
 from resources.search import Search, SearchData
-from scripts.database import db
+from scripts.database import db, load_database, unzip_data
 
 import markdown
 
 # Create an instance of flask
 app = Flask(__name__)
 app.config.from_object(Config)
+
+# Unzip file, load json to database and initiate the database
+unzip_data()
+load_database()
 db.init_app(app)
+
+# Create an instance of flask Restful
 api = Api(app)
 
 
@@ -32,6 +38,7 @@ def index():
     return markdown.markdown(content)
 
 
+# API endpoints
 api.add_resource(PeopleData, '/people')
 api.add_resource(People, '/people/<string:username>')
 api.add_resource(Search, '/search/<string:username>')

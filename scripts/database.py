@@ -10,11 +10,13 @@ from config import basedir
 db = SQLAlchemy()
 
 
+# Unzip data to local directory
 def unzip_data():
   with zipfile.ZipFile(basedir + '/fake_profiles.zip', 'r') as zip_ref:
     zip_ref.extractall(basedir)
 
 
+# Load JSON to sqlite database and set datatypes
 def load_database():
   engine = create_engine('sqlite:///' + os.path.join(basedir, 'api.db'), echo=False)
   with open(basedir + '/fake_profiles.json') as data_file:
@@ -27,6 +29,3 @@ def load_database():
                      "birthdate": String})
 
 
-if __name__ == '__main__':
-  unzip_data()
-  load_database()
