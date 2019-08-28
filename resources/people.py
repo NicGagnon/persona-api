@@ -1,23 +1,22 @@
 from flask_restful import Resource
 from models.people import PeopleModel
+import json
 
 
 class People(Resource):
 
-  def get(self, username):
-    # todo Returns specific person with username
-    pass
-
+  # Delete specific person with username
   def delete(self, username):
-    # todo Delete specific person with username
-    pass
+    user = PeopleModel.find_by_username(username)
+    if user:
+      user.delete_from_db()
+      return {'message': 'User has been deleted'}, 204
+    return {'message': 'Not Found'}, 404
 
 
-class PeopleList(Resource):
+class PeopleData(Resource):
 
   def get(self):
-    # todo Returns all people with pagination
-    pass
-
-
+    return {'people': [{"name and username": json.dumps(person)} for person in
+                       PeopleModel.query.with_entities(PeopleModel.name, PeopleModel.username)]}, 200
 
