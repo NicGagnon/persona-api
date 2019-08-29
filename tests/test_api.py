@@ -8,7 +8,7 @@ from scripts.database import db, load_database
 
 
 class MyTestCase(unittest.TestCase):
-  #execute before each test
+  # execute before each test
   def setUp(self):
     with app.app_context():
       app.config['TESTING'] = True
@@ -27,15 +27,21 @@ class MyTestCase(unittest.TestCase):
       db.drop_all()
       db.session.commit()
 
+  """Home Page return 200 on Success"""
+
   def test_main_page(self):
     with app.app_context():
       response = self.app.get('/', follow_redirects=True)
       self.assertEqual(200, response.status_code)
 
+  """Search Page return 200 on Success"""
+
   def test_search_page(self):
     with app.app_context():
       response = self.app.get('/search', follow_redirects=True)
       self.assertEqual(200, response.status_code)
+
+  """Simple search test"""
 
   def test_found_username(self):
     with app.app_context():
@@ -44,30 +50,42 @@ class MyTestCase(unittest.TestCase):
       self.assertEqual(200, response.status_code)
       self.assertIn('Success', json_data['message'])
 
+  """Search with non existent username"""
+
   def test_look_nonexistent_username(self):
     with app.app_context():
       response = self.app.get('/search/foobar', follow_redirects=True)
       self.assertEqual(404, response.status_code)
+
+  """Search without providing a username"""
 
   def test_no_username(self):
     with app.app_context():
       response = self.app.get('/search/', follow_redirects=True)
       self.assertEqual(404, response.status_code)
 
+  """People Page return 200 on Success"""
+
   def test_people_page(self):
     with app.app_context():
       response = self.app.get('/people', follow_redirects=True)
       self.assertEqual(200, response.status_code)
+
+  """Simple delete test"""
 
   def test_delete_person(self):
     with app.app_context():
       response = self.app.delete('/people/smithhazel', follow_redirects=True)
       self.assertEqual(204, response.status_code)
 
+  """Search for nonexistent user"""
+
   def test_delete_nonexistent_person(self):
     with app.app_context():
       response = self.app.delete('/people/foobar', follow_redirects=True)
       self.assertEqual(404, response.status_code)
+
+  """Delete someone and then check to make sure they are deleted"""
 
   def test_delete_already_deleted_person(self):
     with app.app_context():
@@ -76,6 +94,8 @@ class MyTestCase(unittest.TestCase):
       response = self.app.delete('/people/smithhazel', follow_redirects=True)
       self.assertEqual(404, response.status_code)
 
+  """Looking for someone already deleted"""
+
   def test_search_for_deleted_person(self):
     with app.app_context():
       response = self.app.delete('/people/smithhazel', follow_redirects=True)
@@ -83,5 +103,6 @@ class MyTestCase(unittest.TestCase):
       response = self.app.get('/search/smithhazel', follow_redirects=True)
       self.assertEqual(404, response.status_code)
 
+
 if __name__ == '__main__':
-    unittest.main()
+  unittest.main()

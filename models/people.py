@@ -1,5 +1,6 @@
 from scripts.database import db
 
+
 # SQLalchemy Model for each person in the database
 class PeopleModel(db.Model):
   __tablename__ = 'people'

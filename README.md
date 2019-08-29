@@ -1,10 +1,20 @@
 
-# Usage
+# Getting Started
+
+Download and install Docker Community Edition. If you have Homebrew-Cask, just type brew cask install docker. Or Download and install Docker Toolbox.
+
+Steps to run container:
+1. Download persona-api on machine
+2. Cd into the persona-api directory
+3. Run the following commands 
+ 
+```buildoutcfg
+docker-compose up --build -d
+docker-compose up
+```
 
 
-I WANT THIS TO APPEAR 
-
-
+# Format
 
 All responses will have the form 
 
@@ -112,7 +122,10 @@ The following definitions only detail the expected value from the 'data field'
 
 *** Responses
 
-'404 Not Found' User does not exist
-'204 No Content' on success
+- '404 Not Found' User does not exist
+- '204 No Content' on success
 
 
+# TODO
+- Implement pagination for list of people
+- Add additional security features 

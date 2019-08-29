@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from models.people import PeopleModel
-from scripts.database import db
+
 
 class Search(Resource):
   # Returns specific person with username

@@ -2,6 +2,7 @@
 #
 import os
 
+# Configuration variables to facilitate future refactoring or scaling
 PROFILE_ZIP_PATH = '/fake_profiles.zip'
 PROFILE_JSON_PATH = '/fake_profiles.json'
 API_DATABASE = 'api.db'

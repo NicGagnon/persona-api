@@ -1,8 +1,5 @@
 from flask_restful import Resource
-from sqlalchemy.orm import load_only
-
 from models.people import PeopleModel
-from scripts.database import db
 
 import json
 
@@ -19,6 +16,8 @@ class People(Resource):
 
 class PeopleData(Resource):
   # Return pagination of names and usernames
+  # todo still need to implement pagination functionality, SQLalchemy has built in pagination,
+  #  but doesn't work with tuple returned from .with_entities
   def get(self):
     names = [json.dumps(person).strip('[]""') for person in PeopleModel.query.with_entities(PeopleModel.name)]
     usernames = [json.dumps(person).strip('[]""') for person in PeopleModel.query.with_entities(PeopleModel.username)]
