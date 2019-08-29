@@ -1,6 +1,5 @@
 from scripts.database import db
 
-
 # SQLalchemy Model for each person in the database
 class PeopleModel(db.Model):
   __tablename__ = 'people'
@@ -43,6 +42,7 @@ class PeopleModel(db.Model):
   def delete_from_db(self):
     db.session.delete(self)
     db.session.commit()
+
 
   # Jsonify an instance of the PeopleModel
   def json(self):

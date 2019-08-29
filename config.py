@@ -2,7 +2,11 @@
 #
 import os
 
-
+PROFILE_ZIP_PATH = '/fake_profiles.zip'
+PROFILE_JSON_PATH = '/fake_profiles.json'
+API_DATABASE = 'api.db'
+TEST_API_DATABASE = 'test.db'
+TEST_JSON_PATH = '/tests/test_profiles.json'
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 

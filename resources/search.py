@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from models.people import PeopleModel
-
+from scripts.database import db
 
 class Search(Resource):
   # Returns specific person with username
@@ -15,4 +15,4 @@ class Search(Resource):
 class SearchData(Resource):
   # Function returns full data for all user in pagination
   def get(self):
-    return {'people': [person.json() for person in PeopleModel.query.all()]}, 200
+    return {'people': [person.json() for person in PeopleModel.query.paginate(1, 20, False).items]}, 200

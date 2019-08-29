@@ -1,5 +1,9 @@
 from flask_restful import Resource
+from sqlalchemy.orm import load_only
+
 from models.people import PeopleModel
+from scripts.database import db
+
 import json
 
 
@@ -16,5 +20,10 @@ class People(Resource):
 class PeopleData(Resource):
   # Return pagination of names and usernames
   def get(self):
-    return {'people': [{"name and username": json.dumps(person)} for person in
-                       PeopleModel.query.with_entities(PeopleModel.name, PeopleModel.username)]}, 200
+    names = [json.dumps(person).strip('[]""') for person in PeopleModel.query.with_entities(PeopleModel.name)]
+    usernames = [json.dumps(person).strip('[]""') for person in PeopleModel.query.with_entities(PeopleModel.username)]
+    peopledata = []
+    for index in range(len(names)):
+      peopledata.append({"name": names[index], "username": usernames[index]})
+    return {"data": peopledata}, 200
+
